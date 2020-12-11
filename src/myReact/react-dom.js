@@ -14,8 +14,13 @@ function render(vnode, container) {
 //vnode->node
 function createNode(vnode) {
 	const { type, props } = vnode
-  
 	let node
+
+	if(!type) {
+		node = document.createElement('span')
+		node.innerHTML = String(vnode)
+		return node
+	}
   
 	// todo 根据节点类型，生成dom节点
 	if (type === 'TEXT') {
@@ -56,6 +61,9 @@ function updateFunctionComponent(vnode) {
 }
   
 function reconcileChildren(node, children) {
+	if(!children) {
+		return 
+	}
 	for (let i = 0; i < children.length; i++) {
 		const child = children[i]
 
